@@ -10,8 +10,9 @@ public class CD implements Document {
 	private String titre;
 	private String auteur;
 	
-	public CD(){
-		
+	public CD(String titre, String auteur){
+		this.titre = titre;
+		this.auteur = auteur;
 	}
 	
 	@Override

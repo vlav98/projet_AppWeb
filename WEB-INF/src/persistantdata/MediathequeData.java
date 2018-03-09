@@ -88,12 +88,7 @@ public class MediathequeData implements PersistentMediatheque {
 		try {
 			ResultSet res = statement.executeQuery("SELECT * FROM Document WHERE idDoc="+numDocument);
 			if(res.next()){
-				
-				
-//				if(res.getBoolean("CD"))
-//				{
-//					doc = new CD(res.getString("NomDoc"),res.getString("Auteur"));
-//				}
+				doc = new Document(res.getString("Type"), res.getString("NomDoc"), res.getString("Auteur"));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -108,16 +103,27 @@ public class MediathequeData implements PersistentMediatheque {
 		// args[0] -> le titre
 		// args [1] --> l'auteur
 		// etc...
-		PreparedStatement pstm;
-		String val = "";
-		try {
-			pstm = c.prepareStatement(
-					"INSERT INTO Document(titre, Auteur) VALUES('?', ?)");
-			for(int i=0;i<args.length; i++){
-				val = val + args[i];
+		PreparedStatement pstm = null;
+		String titre = (String) args[0];
+		String auteur = (String) args[1];
+		try {			
+			switch(type) {
+			case 1: 
+				pstm = c.prepareStatement(
+						"INSERT INTO Document(Type, titre, Auteur) VALUES('Livre', ?,?)");
+				break;
+			case 2:
+				pstm = c.prepareStatement(
+						"INSERT INTO Document(Type, titre, Auteur) VALUES('CD', ?,?)");
+				break;
+			case 3:
+				pstm = c.prepareStatement(
+						"INSERT INTO Document(Type, titre, Auteur) VALUES('DVD', ?,?)");
+				break;
 			}
-			pstm.setString(2, val);
-			pstm.executeUpdate();
+			pstm.setString(1, titre);
+			pstm.setString(2, auteur);
+			pstm.executeUpdate();			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

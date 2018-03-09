@@ -2,5 +2,6 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="H:/COMMUN/DUT 2ème année/Applis Web Java/Semaine 2 et 3/tp 1 servlets/javax.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
